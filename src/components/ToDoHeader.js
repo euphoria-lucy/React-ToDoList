@@ -39,15 +39,30 @@ const DateText = styled.p`
   // padding: 10px;
 `;
 
+const TodoCount = styled.p`
+  font-size: 27px;
+  font-family: "BMJUA", sans-serif;
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  transform: translateX(-30%);
+  color: grey;
+  background: inherit;
+`;
+
 function ToDoHeader() {
   const date = new Date();
+
   const dayOptions = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+
   const formattedDate = date.toLocaleDateString("ko-KR", dayOptions);
+
+  const todoCount = 7;
 
   return (
     <>
@@ -56,6 +71,7 @@ function ToDoHeader() {
 
       <ToDoHeadBlock>
         <DateText>{formattedDate}</DateText>
+        <TodoCount>할 일 갯수 : {todoCount}개 남음</TodoCount>
       </ToDoHeadBlock>
     </>
   );
