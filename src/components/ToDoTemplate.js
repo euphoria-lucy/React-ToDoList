@@ -11,10 +11,11 @@ const TemplateBlock = styled.div`
 
   position: relative;
   display: flex;
-  border-radius: 15px;
+  border-radius: 15px; // 모서리 둥글게
 
   margin-top: 70px;
   margin-bottom: 70px;
+  // 가운데 정렬
   margin-left: auto;
   margin-right: auto;
 `;
