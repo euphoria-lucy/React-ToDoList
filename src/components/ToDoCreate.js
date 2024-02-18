@@ -46,7 +46,8 @@ const ToDoList = styled.div`
   height: 430px;
   margin: 0 auto;
   overflow-y: auto;
-  background: coral;
+  // background: coral;
+  background: #ffeaf1;
   font-family: "BMJUA", sans-serif;
 `;
 
@@ -66,6 +67,10 @@ const ToDoItem = styled.div`
   // 가운데 정렬
   margin-left: auto;
   margin-right: auto;
+  transition: background 0.3s ease; /* 트랜지션 효과 추가 */
+  ${({ checked }) =>
+    checked &&
+    "background: #f4e2e8; opacity: 0.5;"}/* 체크된 경우 배경색과 투명도 변경 */
 `;
 
 // 체크박스
@@ -74,12 +79,6 @@ const CheckBox = styled.input`
   width: 20px;
   height: 20px;
 `;
-
-// const DeleteButton = styled.button`
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-// `;
 
 // 삭제 이모지
 const TrashCan = styled.div`
@@ -125,6 +124,7 @@ function ToDoCreate() {
       const newTodo = {
         id: Date.now(),
         content: inputValue,
+        checked: false,
       };
       setTodos([...todos, newTodo]);
       setInputValue("");
@@ -133,6 +133,19 @@ function ToDoCreate() {
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
+  };
+
+  const handleCheck = (id) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          checked: !todo.checked,
+        };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
   };
 
   const handleDelete = (id) => {
@@ -145,7 +158,11 @@ function ToDoCreate() {
       <ToDoList>
         {todos.map((todo) => (
           <ToDoItem key={todo.id} checked={todo.checked}>
-            <CheckBox type="checkbox" checked={todo.checked} />
+            <CheckBox
+              type="checkbox"
+              checked={todo.checked}
+              onChange={() => handleCheck(todo.id)}
+            />
             {todo.content}
             <TrashCan onClick={() => handleDelete(todo.id)}>
               <img alt="휴지통" src="img/garbage.png" />
