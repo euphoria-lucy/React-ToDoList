@@ -10,7 +10,7 @@ function App() {
       <ToDoTemplate>
         <div className="container">
           <ToDoHeader />
-          <div className="spacer"></div>
+          {/* <div className="spacer"></div> */}
           <ToDoCreate />
         </div>
       </ToDoTemplate>
